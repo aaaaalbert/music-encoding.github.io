@@ -1,0 +1,9 @@
+<div>
+	<h3>Tempus perfectum: See Guidelines!</h3>
+	<p>The encoding examples shown so far used Tempus imperfectum, i.e. a <em>binary</em> division of breves into semibreves. When encoding music in Tempus perfectum – signifying a <em>ternary</em> division instead –, the associated set of rules must be applied to correctly represent imperfected and alterated note values in MEI.</p>
+	<p>This is explained in the <a href="https://music-encoding.org/guidelines/v5/content/mensural.html#mensuralRules">Mensural Notation section</a> of the MEI Guidelines.</p>
+	<h3>Short summary</h3>
+		<p>On the markup side, the note's <code>dur</code> (duration, using mensural notation's special names for note values) is accompanied by the <code>dur.quality</code> attribute which encodes (im)perfection and alteration.</p>
+		<p>Furthermore, <code>&lt;dot&gt;</code>s are available in augmentation as well as division forms.</p>
+		<p>More complicated ways of imperfection can be encoded using a note's <code>num</code> and <code>numbase</code> (like tuplets in CMN MEI.)</p>
+</div>

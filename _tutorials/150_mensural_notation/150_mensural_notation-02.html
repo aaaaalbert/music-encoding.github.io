@@ -1,0 +1,87 @@
+<div>
+	<h2>A Quick Example</h2>
+	<p>If you have seen white mensural notation before, you will have no hard time to read this little piece. It is the first staff of the tenor voice for “Als ab on sy” from D-Mu MS 8° 328, written around 1525, supposedly by Ludwig Senftl:</p>
+	<figure>
+	<img src="als_ab_on_sy.jpg" width="100%">
+	<figcaption>An example of white mensural notation: First staff of tenor voice for &quot;Als ab on sy&quot;, approximately 1525, attributed to Ludwig Senftl. Source: <a href="https://epub.ub.uni-muenchen.de/12051/">D-Mu MS 8° 328</a> (Public Domain)</figcaption>
+	</figure>
+	<p>And this is the MEI rendition of the above:</p>
+	<figure>
+	<img src="als_ab_on_meifriend.png" width="100%">
+	<figcaption>Rendered MEI for the same staff</figcaption>
+	</figure>
+	<p>What follows in the code blocks below is the corresponding MEI source code. <em>Don't worry</em> if you cannot make sense of all of it yet – we will go over each statement in the next steps of this tutorial!</p>
+	<h3>Namespace declaration</h3>
+	<p>First of all, mensural MEI uses a specific schema, <code>mei-Mensural.rng</code>:</p>
+	<pre class="codeblock">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-model href=&quot;https://music-encoding.org/schema/5.1/mei-Mensural.rng&quot; type=&quot;application/xml&quot; schematypens=&quot;http://relaxng.org/ns/structure/1.0&quot;?&gt;
+&lt;?xml-model href=&quot;https://music-encoding.org/schema/5.1/mei-Mensural.rng&quot; type=&quot;application/xml&quot; schematypens=&quot;http://purl.oclc.org/dsdl/schematron&quot;?&gt;
+	</pre>
+	<h3>MEI header</h3>
+	<p>The MEI header looks as usual (and is not populated for this example).</p>
+	<pre class="codeblock">
+&lt;mei xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot; meiversion=&quot;5.1&quot;&gt;
+   &lt;meiHead&gt;
+      &lt;fileDesc&gt;
+         &lt;titleStmt&gt;
+            &lt;title/&gt;
+         &lt;/titleStmt&gt;
+         &lt;pubStmt/&gt;
+      &lt;/fileDesc&gt;
+   &lt;/meiHead&gt;
+	</pre>
+	<h3>Staff uses mensural notation</h3>
+	<p>The <code>&lt;staffDef&gt;</code> which identifies our example as <code>notationtype=&quot;mensural.white&quot;</code>.</p>
+	<pre class="codeblock">
+   &lt;music&gt;
+      &lt;body&gt;
+         &lt;mdiv&gt;
+            &lt;score&gt;
+               &lt;scoreDef&gt;
+                  &lt;staffGrp&gt;
+                     &lt;staffDef n=&quot;1&quot; notationtype=&quot;mensural.white&quot; clef.line=&quot;4&quot; clef.shape=&quot;C&quot; lines=&quot;5&quot; mensur.sign=&quot;C&quot; mensur.slash=&quot;1&quot; tempus=&quot;2&quot; prolatio=&quot;2&quot;&gt;
+                     &lt;/staffDef&gt;
+                  &lt;/staffGrp&gt;
+               &lt;/scoreDef&gt;
+	</pre>
+	<h3>The actual music</h3>
+	<p>In the <code>&lt;section&gt;</code> below, you see the actual notes with the mensural-specific encoding of durations (explained in later steps of the tutorial).</p>
+	<pre class="codeblock">
+               &lt;section&gt;
+                  &lt;staff n=&quot;1&quot;&gt;
+                     &lt;layer n=&quot;1&quot;&gt;
+                        &lt;rest dur=&quot;brevis&quot; /&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;c&quot; oct=&quot;4&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;a&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;a&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;f&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+                        &lt;rest dur=&quot;minima&quot; /&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;c&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;f&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semibrevis&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;f&quot; oct=&quot;3&quot; dots.ges=&quot;1&quot;/&gt;&lt;dot /&gt;
+                        &lt;note dur=&quot;semiminima&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semiminima&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;semiminima&quot; pname=&quot;c&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+                        &lt;note dur=&quot;minima&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+                        &lt;custos pname=&quot;c&quot; oct=&quot;3&quot;/&gt;
+                     &lt;/layer&gt;
+                  &lt;/staff&gt;
+               &lt;/section&gt;
+            &lt;/score&gt;
+         &lt;/mdiv&gt;
+      &lt;/body&gt;
+   &lt;/music&gt;
+&lt;/mei&gt;
+	</pre>
+</div>
+

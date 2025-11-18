@@ -1,0 +1,39 @@
+{
+  "steps": [
+    {
+        "label": "Welcome",
+        "descFile": "150_mensural_notation-01.html"
+    },
+    {
+        "label": "Example",
+        "descFile": "150_mensural_notation-02.html"
+    },
+    {
+        "label": "Note values",
+        "descFile": "150_mensural_notation-03.html"
+    },
+    {
+        "label": "Staff and clef",
+        "descFile": "150_mensural_notation-04.html"
+    },
+    {
+        "label": "Mensuration sign",
+        "descFile": "150_mensural_notation-05.html"
+    },
+    {
+	    "label": "Tempus perfectum",
+	    "descFile": "150_mensural_notation-06.html"
+    },
+    {
+	    "label": "Ligatures",
+	    "descFile": "150_mensural_notation-07.html"
+    }
+  ],
+  "end": "150_mensural_notation-end.html",
+  "resp": [
+    {
+        "name": "Albert Rafetseder",
+        "affiliation": "Universität Wien"
+    }
+  ]
+}

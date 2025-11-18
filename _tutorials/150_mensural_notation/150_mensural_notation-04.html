@@ -1,0 +1,25 @@
+<div>
+	<p>Now that we know how to encode mensural note values with special <code>dur</code> values, let's examine the beginning of our example in greater detail. Here is the beginning of the staff, showing the staff lines, clef, and mensural sign.</p>
+	<img src="als_ab_on_clef_and_mensural_sign.png">
+	<p>In the source code, we need to declare in the <code>staffDef</code> that this MEI file uses mensural notation. Our example is in <em>white</em> mensural notation, so that's what we declare:</p>
+	<pre class="codeblock">
+          &lt;staffDef n=&quot;1&quot; notationtype=&quot;mensural.white&quot; <span class="text-gray">...other attributes follow...</span> &gt;
+	</pre>
+	<p>Our example uses a 5-line staff (although less and more lines are quite common in mensural notation as well), so we put <code>lines=&quot;5&quot;</code> here.</p>
+	<p>Furthermore, we define the clef shape and position: <code>clef.shape=&quot;C&quot; clef.line=&quot;4&quot;</code>. Note the shape of the clef which is distinct from the C clef in Common Western Music Notation, 𝄡. Also, the clef position was not yet standardized for mensural notation, so expect to see clefs on different lines than in Common Western Music Notation.</p>
+
+	<hr>
+
+	<h2>Side Note: Clefs in Sources and Rendering</h2>
+	<p>You might have noticed that the C clefs in the source and the one in the rendered MEI look quite different. First, mensural notation uses a variety of clef shapes, as exemplified by Agricola in his Musica figuralis in the following figure. It shows a g clef on the top-most line, a selection of c clefs below that – the middle one looks closest to the one in our rendering –, and a few f clefs yet further down below.</p>
+	<figure>
+	<img src="clefs_agricola.jpg" width="50%">
+	<figcaption>Source: Martin Agricola, Musica figuralis deudsch, <a href="https://viewer.onb.ac.at/105970BE/">A Mus Mag SA.71.F.55</a>, (public domain / non-commercial)</figcaption>
+	</figure>
+	<p>To contrast, this is how the Verovio renderer shows the mensural g, c, and f clefs (from top to bottom) on lines 2, 3, and 4, respectively. As mentioned in the introduction, we are not so much concerned with an exact visual match for the clef symbol, as long as we mark up the source in a semantically correct way. For clefs, this means that their exact position (line number) must be encoded as it appears in the source.</p>
+	<figure>
+	<img src="clefs_meifriend.png" width="50%">
+	<figcaption>Rendered MEI for a system of three five-line staves, showing (from top to bottom) the mensural variants of the <em>g</em>, <em>c</em>, and <em>f</em> clefs.</figcaption>
+	</figure>
+</div>
+

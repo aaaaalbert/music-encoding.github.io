@@ -1,0 +1,107 @@
+<div>
+	<p>Ligatures are used in mensural notation to write groups of notes. They follow a certain system that is based on the older modal notation and encodes rhythmic patterns based on a few rules. In MEI, we put <code>&lt;ligature&gt;</code> around a group of notes to merge them into a ligature; furthermore, the <code>&lt;note&gt;</code> element may contain a <code>lig</code> attribute for additional control of the ligature form. Generally, ligatures can bind maximae, longae, breves, and semibreves, but none of the shorter note values. Ligatures come in two forms, or combinations of those: <em>recta</em> (resulting in &quot;boxes&quot; instead of note heads) and <em>obliqua</em> (slanted parallelograms). Notes in direct succession must have different pitches.</p>
+	<h3>Ligatures without stems (caudae)</h3>
+	<p>The simplest ligatures bind two notes. The governing rules can be understood from comparing the rendered MEI with the source code excerpts below.</p>
+	<figure>
+		<img src="ligatures_simple.png" width="100%">
+		<figcaption>From left: recta ligatures for longa–longa and brevis-brevis; obliqua ligatures for longa–brevis; ligatures with &quot;middle notes&quot;.</figcaption>
+	</figure>
+	<p>The rules are as follows (going from left to right):</p>
+	<ul>
+		<li>Two recta shapes in a downward melodic motion represent two longa notes.</li>
+		<li>Two recta shapes in an upward melodic motion represent two brevis notes.</li>
+		<li>An obliqua shape (regardless of melodic motion) represents a longa, followed by a brevis.</li>
+		<li>If the ligature has middle notes, the above rules apply to the first and last note of the ligature, while the middle notes are all breves.</li>
+	</ul>
+	<p>Possible exceptions to the rule of &quot;middle notes&quot; are maximas – see the penultimate note, an obviously wide rectangle, in the rightmost example –, and notes with stems (caudae) which will be explained in the next subsection.</p>
+	<p>Here is the relevant snippet of the MEI source code to render the above ligature examples:</p>
+	<pre class="codeblock">
+&lt;ligature form=&quot;recta&quot;&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;3&quot; pname=&quot;b&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;recta&quot;&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;3&quot; pname=&quot;b&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+&lt;/ligature&gt;
+&lt;barLine form=&quot;dbl&quot;/&gt;&lt;space/&gt;
+
+&lt;ligature form=&quot;obliqua&quot;&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;3&quot; pname=&quot;b&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;4&quot; pname=&quot;d&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;obliqua&quot;&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;3&quot; pname=&quot;a&quot;/&gt;
+&lt;/ligature&gt;
+&lt;barLine form=&quot;dbl&quot;/&gt;&lt;space/&gt;
+
+&lt;ligature&gt;
+   &lt;note dur=&quot;longa&quot; pname=&quot;d&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;b&quot; oct=&quot;3&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;c&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;d&quot; oct=&quot;4&quot;/&gt;
+&lt;/ligature&gt;&lt;space/&gt;
+&lt;ligature&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;a&quot; oct=&quot;3&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;d&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;maxima&quot; pname=&quot;b&quot; oct=&quot;3&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;d&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;b&quot; oct=&quot;3&quot;/&gt;
+&lt;/ligature&gt;
+	</pre>
+	<h3>Ligatures with stems (caudae)</h3>
+	<p>The basic rules covered above allow only for a limited range of rhythmic expression. By using stems – called &quot;caudae&quot;, literally: tails –, notes in ligatures can be modified beyond these.</p> 
+	<figure>
+		<img src="ligatures_caudae.png" width="100%">
+		<figcaption>Ligatures with caudae (stems)</figcaption>
+	</figure>
+	<p>Caudae modify the note values according to the following rules:
+	<ul>
+		<li>A downstroke on the right side of a note makes the note a longa, overriding previous duration rules.</li>
+		<li>A downstroke on the left side of the first note makes the first note a brevis, overriding previous duration rules.</li>
+		<li>An upstroke on the left of the first note makes this note and the one immediately following it semibreves.</li>
+	</ul>
+	<pre class="codeblock">
+&lt;ligature&gt;
+   &lt;note dur=&quot;longa&quot; pname=&quot;c&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;e&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;longa&quot; pname=&quot;c&quot; oct=&quot;4&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;a&quot; oct=&quot;3&quot;/&gt;
+   &lt;note dur=&quot;brevis&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+&lt;/ligature&gt;
+&lt;barLine form=&quot;dbl&quot;/&gt;&lt;space/&gt;
+
+&lt;ligature form=&quot;recta&quot;&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;3&quot; pname=&quot;b&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;obliqua&quot;&gt;
+   &lt;note dur=&quot;brevis&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;longa&quot; oct=&quot;3&quot; pname=&quot;g&quot;/&gt;
+&lt;/ligature&gt;
+&lt;barLine form=&quot;dbl&quot;/&gt;&lt;space/&gt;
+
+&lt;ligature form=&quot;recta&quot;&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;d&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;recta&quot;&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;e&quot;/&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;d&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;obliqua&quot;&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;3&quot; pname=&quot;a&quot;/&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;d&quot;/&gt;
+&lt;/ligature&gt;
+&lt;ligature form=&quot;obliqua&quot;&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;4&quot; pname=&quot;c&quot;/&gt;
+   &lt;note dur=&quot;semibrevis&quot; oct=&quot;3&quot; pname=&quot;a&quot;/&gt;
+&lt;/ligature&gt;
+	</pre>
+	<h3>Miscellania: Tempus perfectum, dots, Color</h3>
+	<p>The ligature rules presented above work the same for either Tempus. For Tempus perfectum, the &quot;grouping&quot; mechanics for perfection and alteration are applied as usual.</p>
+	<p>Just as non-ligature notes, parts of a ligature can receive dots for augmentation.</p>
+	<p>Lastly, Color may be applied to parts of a ligature as well. Depending on the time and context, Color expresses either dotting, triplets, a hemiola, or just smaller note values.
+</div>

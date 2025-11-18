@@ -1,0 +1,41 @@
+<div>
+	<h2>Note values</h2>
+	<p>Mensural notation has its own terminology for note values, and the names (and shapes) even differ slightly between white and black mensural notation. This excerpt from Salminger's <em>Gradatio</em> provides a succint overview of white mensural notation for us:</p>
+	<figure>
+	<img src="salminger_gradatio.jpg" width="100%">
+	<figcaption>White mensural notation's names for note and rest durations. Source: Sigmund Salminger, Gradatio, <a href="https://www.digitale-sammlungen.de/de/view/bsb00090645">D-Mbs 2 Mus.pr. 156-1/8</a> (public domain / non-commercial)</figcaption>
+	</figure>
+	<p>Both note and rest values are shown, together with a count in the current <em>mensura</em> (i.e. roughly the meter), and the respective names. In mensural MEI, these names are used in a <code>&lt;note&gt;</code>'s or <code>&lt;rest&gt;</code>'s duration attribute, <code>dur</code>. This is how we transcribe Salminger's overview into MEI (slightly simplified to reduce clutter):</p>
+	<figure>
+	<img src="salminger_meifriend.png" width="100%">
+	<figcaption>Rendered MEI version of mensural note and rest durations</figcaption>
+	</figure>
+	<pre class="codeblock">
+&lt;staff n=&quot;1&quot;&gt;
+   &lt;layer n=&quot;1&quot;&gt;
+      &lt;note dur=&quot;maxima&quot; /&gt;     &lt;rest dur=&quot;maxima&quot; /&gt;     &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;longa&quot; /&gt;      &lt;rest dur=&quot;longa&quot; /&gt;      &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;brevis&quot; /&gt;     &lt;rest dur=&quot;brevis&quot; /&gt;     &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;semibrevis&quot; /&gt; &lt;rest dur=&quot;semibrevis&quot; /&gt; &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;minima&quot; /&gt;     &lt;rest dur=&quot;minima&quot; /&gt;     &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;semiminima&quot; /&gt; &lt;rest dur=&quot;semiminima&quot; /&gt; &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;fusa&quot; /&gt;       &lt;rest dur=&quot;fusa&quot; /&gt;       &lt;barLine form=&quot;dbl&quot; /&gt;
+      &lt;note dur=&quot;semifusa&quot; /&gt;   &lt;rest dur=&quot;semifusa&quot; /&gt;   &lt;barLine form=&quot;dbl&quot; /&gt;
+   &lt;/layer&gt;
+&lt;/staff&gt;
+	</pre>
+	<p>If you look closely, you will notice an error in Verovio's rendering of the <em>maxima</em> rest. It is correctly shown as a double vertical bar, but spans five lines instead of two (which it should in this mensura). This problem is <a href="https://github.com/rism-digital/verovio/issues/560">tracked by the Verovio developers</a> already, and will be fixed in a future version.</p>
+	<hr>
+	<h2>Back to the example</h2>
+	<p>Before we move on, let's look at a snippet from our example piece quickly. This shows you a few mensural note values in actions.</p>
+	<img src="als_ab_on_meifriend_crop.png">
+	<p>Of course, we not only encode the note durations, but also the pitches and dots! (Don't get confused seeing the first note, g, <em>above</em> instead of <em>on</em> the second staff line. The current clef here puts c on the fourth line.)</p>
+	<pre class="codeblock">
+&lt;note dur=&quot;semibrevis&quot; pname=&quot;g&quot; oct=&quot;3&quot;/&gt;
+&lt;note dur=&quot;minima&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+&lt;note dur=&quot;minima&quot; pname=&quot;f&quot; oct=&quot;3&quot; dots.ges=&quot;1&quot;/&gt;&lt;dot /&gt;
+&lt;note dur=&quot;semiminima&quot; pname=&quot;e&quot; oct=&quot;3&quot;/&gt;
+&lt;note dur=&quot;semiminima&quot; pname=&quot;d&quot; oct=&quot;3&quot;/&gt;
+&lt;note dur=&quot;semiminima&quot; pname=&quot;c&quot; oct=&quot;3&quot;/&gt;
+	</pre>
+</div>

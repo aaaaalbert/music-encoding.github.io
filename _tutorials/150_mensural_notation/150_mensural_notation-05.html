@@ -1,0 +1,47 @@
+<div>
+	<h2>Mensura and mensuration sign</h2>
+	<p>Mensural notation allows the writer to indicate a <em>mensura</em> which expresses how a longer note will be split up in (two or three) shorter notes on different levels of subpartition of note values. This is in contrast to earlier notations, e.g. neumes which had no regular meter, but also different from modern notation where durations follow binary splitting by default: a whole note contains two half notes, a half note contains two quarter notes, and so on.</p>
+	<p>MEI treats the actual mensura (i.e. how notes will be sung or played) as separate from the mensuration sign (i.e. what is written down, if anything). For a proper transcription, both must be encoded.</p>
+
+	<h2>Mensuration sign</h2>
+	<p>The mensuration sign is comparatively easy to encode: Either it is missing from the source altogether (or is not noted for the particular voice we are looking at) – then we just leave out the associated attributes in our <code>&lt;staffDef&gt;</code> or <code>&lt;scoreDef&gt;</code>.</p>
+	<p>If, however, there is a mensuration sign, we encode it in the <code>&lt;staffDef&gt;</code> using the <code>mensur.sign</code>, <code>mensur.dot</code>, <code>mensur.slash</code>, and possibly the <code>mensur.orient</code> attributes.</p>
+	<p>Here is are an example showing various combinations of these attributes. (Note that mensuration signs sometimes change in the course of a piece, for which you can use the <code>&lt;mensur&gt;</code> element within layers of a staff, just as we do here.)</p>
+	<img src="mensuration_signs.png">
+	<p>The sign can be an O or a C, it may be dotted and slashed, and can be oriented in reverse if need be.</p>
+	<pre class="codeblock">
+&lt;staff n=&quot;1&quot;&gt;
+   &lt;layer n=&quot;1&quot;&gt;
+      &lt;space&gt;&lt;/space&gt;
+      &lt;mensur sign=&quot;O&quot; /&gt; &lt;space /&gt;
+      &lt;mensur sign=&quot;O&quot; dot=&quot;true&quot;/&gt; &lt;space /&gt;
+      &lt;mensur sign=&quot;C&quot;/&gt; &lt;space /&gt;
+      &lt;mensur sign=&quot;C&quot; dot=&quot;true&quot; orient=&quot;reversed&quot; /&gt; &lt;space /&gt;
+      &lt;mensur sign=&quot;C&quot; slash=&quot;1&quot; /&gt; &lt;space /&gt;
+   &lt;/layer&gt;
+&lt;/staff&gt;
+	</pre>
+	We are now able to put the correct mensuration sign. Time to encode the appropriate <em>mensura</em> too.
+	<h2>Mensura</h2>
+	<p>As said above, the mensura expresses the division of longer notes into shorter notes on different levels. There are four levels, each describing the relationship between neighboring classes of note values. Agricola provides a handy overview of mensuration signs and note value subdivisions:
+	<figure>
+		<img src="agricola_tactus.jpg" width="80%">
+		<figcaption>Mensuration signs and note value subdivisions. Source: Martin Agricola, Musica figuralis deudsch, <a href="https://viewer.onb.ac.at/105970BE/">A Mus Mag SA.71.F.55</a>, (public domain / non-commercial)</figcaption>
+	</figure>
+	<p>As you can see, the middle column holds the mensuration sign, and the base for the relationships of note values is the semibrevis: Its column contains 1 for all rows. Going sideways, either relationship may be binary – signifying that two shorter notes go into one longer note – or ternary, i.e. one longer note contains three shorter notes. The respective attributes for the <code>&lt;staffDef&gt;</code> are set to <code>&quot;2&quot;</code> or <code>&quot;3&quot;</code>. The setup in the penultimate row with mensuration sign C is what we are used to from Common Western Music Notation: Every note value contains two smaller notes, across all classes of durations.</p>
+	<p>Starting from the left of the table, the note value relationships between neighboring columns have specific names:
+	<dl>
+		<dt>Modus maior (or maximodus), <code>modusmaior</code></dt>
+		<dd>Longa / maxima relationship</dd>
+		<dt>Modus minor (or modus), <code>modusminor</code></dt>
+		<dd>Brevis / longa relationship</dd>
+		<dt>Tempus, <code>tempus</code></dt>
+		<dd>Semibrevis / brevis relationship: <code>&quot;3&quot;</code> for an O mensuration sign (called &quot;Tempus perfectum&quot;), <code>&quot;2&quot;</code> for a C (&quot;Tempus imperfectum&quot;)</dd>
+		<dt>Prolatio, <code>prolatio</code></dt>
+		<dd>Minima / semibrevis relationship: <code>&quot;3&quot;</code> for a dotted mensuration sign (this is &quot;Prolation maior&quot;), <code>&quot;2&quot;</code> for a sign with no dot (&quot;Prolatio minor&quot;)</dd>
+	</dl>
+	<p>Below the minima, all values use strict binary division, i.e. there are always two seminminimae to the minima, and so on for the fusae and semifusae as well.</p>
+	<h3>The problem of the modi</h3>
+	<p>The (un)dotted C or O mensuration sign only tells us about the relationships on Tempus and Prolatio level. The Modus maior and minor are more difficult to find out. In most later sources, they might not be stipulated at all; sometimes, additional numbers are put next to the mensuration sign, or the exact shape of the rest symbols can be indicative.</p>
+	<p>This tutorial cannot hope to cover all cases across the centuries. Therefore, please consult the literature for details!</p>
+</div>
